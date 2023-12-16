@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Nav from "./Nav";
+import axios from "axios"
 
 export default function Form() {
+  const apiUrl = "http://localhost:8000/api";
+
   const [state, setState] = useState({
     title: "",
     content: "",
@@ -17,7 +20,8 @@ export default function Form() {
 
   function submitForm(e) {
     e.preventDefault();
-    console.table({ title, content, author });
+    console.log("API URL", apiUrl);
+    axios.post(`${apiUrl}/create`)
   }
 
   return (
