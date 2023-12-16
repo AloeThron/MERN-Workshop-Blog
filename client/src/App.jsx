@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Nav from "./components/Nav";
 import "./App.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function App() {
   const apiUrl = "http://localhost:8000/api";
@@ -27,9 +28,14 @@ function App() {
         {blogs.map((blog, index) => (
           <div key={index} className="row">
             <div className="col pt-3 pb-2">
-              <h2>{blog.title}</h2>
+              <Link to={`/blog/${blog.slug}`} >
+                <h2>{blog.title}</h2>
+              </Link>
               <p>{blog.content.substring(0, 150)}</p>
-              <p className="text-muted">Author: {blog.author}, Publish: {new Date(blog.createdAt).toLocaleString()}</p>
+              <p className="text-muted">
+                Author: {blog.author}, Publish:{" "}
+                {new Date(blog.createdAt).toLocaleString()}
+              </p>
             </div>
           </div>
         ))}
