@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Nav from "./Nav";
 import axios from "axios";
-import swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 export default function Form() {
   const apiUrl = "http://localhost:8000/api";
@@ -21,11 +21,23 @@ export default function Form() {
 
   function submitForm(e) {
     e.preventDefault();
-    console.log("API URL", apiUrl);
     axios
       .post(`${apiUrl}/create`, { title, content, author })
-      .then((res) => alert("Send data complete"))
-      .catch((err) => alert(err.response.data.error));
+      .then((res) => {
+        Swal.fire({
+          title: "Alert!",
+          text: "Send data complete!",
+          icon: "success",
+        });
+        setState({...state, title:"", content: "", author: ""})
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.response.data.error,
+        });
+      });
   }
 
   return (
@@ -39,6 +51,7 @@ export default function Form() {
             type="text"
             className="form-control"
             onChange={inputValue("title")}
+            value={state.title}
           />
         </div>
         <div className="form-group mb-3">
@@ -47,6 +60,7 @@ export default function Form() {
             type="text"
             className="form-control"
             onChange={inputValue("content")}
+            value={state.content}
           />
         </div>
         <div className="form-group mb-3">
@@ -55,6 +69,7 @@ export default function Form() {
             type="text"
             className="form-control"
             onChange={inputValue("author")}
+            value={state.author}
           />
         </div>
         <input type="submit" value="Submit" className="btn btn-primary mt-5" />
