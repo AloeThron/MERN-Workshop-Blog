@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 // connect database
 const slugify = require("slugify");
 const Blogs = require("../models/blogs");
@@ -6,6 +8,10 @@ const Blogs = require("../models/blogs");
 exports.create = (req, res) => {
   const { title, content, author } = req.body;
   const slug = slugify(title);
+
+  if (!slug) {
+    slug = uuidv4();
+  }
 
   switch (true) {
     case !title:
