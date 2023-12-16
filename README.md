@@ -6,6 +6,7 @@ FontEnd
 - React
 - Vite
 - Bootstrap
+- axios
 
 
 BackEnd

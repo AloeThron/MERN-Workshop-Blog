@@ -15,11 +15,16 @@ export default function Form() {
     };
   }
 
+  function submitForm(e) {
+    e.preventDefault();
+    console.table({ title, content, author });
+  }
+
   return (
     <div className="container p-5">
-        <Nav />
+      <Nav />
       <div className="fs-1 my-5">Write Article</div>
-      <form>
+      <form onSubmit={submitForm}>
         <div className="form-group mb-3">
           <label>Article Name</label>
           <input
