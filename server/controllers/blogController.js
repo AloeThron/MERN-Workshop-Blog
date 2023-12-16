@@ -23,7 +23,10 @@ exports.create = (req, res) => {
 };
 
 exports.getAllblogs = (req, res) => {
-  Blogs.find({})
-    .then((blogs) => res.json(blogs))
-    .catch((err) => res.status(400).json({ error: "Title is duplicate" }));
+  Blogs.find({}).then((blogs) => res.json(blogs));
+};
+
+exports.singleBlog = (req, res) => {
+  const { slug } = req.params;
+  Blogs.findOne({ slug }).then((blogs) => res.json(blogs));
 };
