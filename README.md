@@ -7,6 +7,7 @@ FontEnd
 - Vite
 - Bootstrap
 - axios
+- sweetalert2
 
 
 BackEnd

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Nav from "./Nav";
 import axios from "axios";
+import swal from "sweetalert2"
 
 export default function Form() {
   const apiUrl = "http://localhost:8000/api";
@@ -21,7 +22,10 @@ export default function Form() {
   function submitForm(e) {
     e.preventDefault();
     console.log("API URL", apiUrl);
-    axios.post(`${apiUrl}/create`, { title, content, author }).then(res => alert("Send data complete")).catch(err => alert(err.res.data.error));
+    axios
+      .post(`${apiUrl}/create`, { title, content, author })
+      .then((res) => alert("Send data complete"))
+      .catch((err) => alert(err.response.data.error));
   }
 
   return (
