@@ -1,13 +1,12 @@
-import { v4 as uuidv4 } from "uuid";
-
 // connect database
 const slugify = require("slugify");
 const Blogs = require("../models/blogs");
+const { v4: uuidv4 } = require('uuid');
 
 // save data
 exports.create = (req, res) => {
   const { title, content, author } = req.body;
-  const slug = slugify(title);
+  let slug = slugify(title);
 
   if (!slug) {
     slug = uuidv4();
