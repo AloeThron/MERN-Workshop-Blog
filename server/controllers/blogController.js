@@ -17,8 +17,13 @@ exports.create = (req, res) => {
   }
 
   // send data to database
-  Blogs
-    .create({ title, content, author, slug })
+  Blogs.create({ title, content, author, slug })
     .then((blog) => res.json(blog))
+    .catch((err) => res.status(400).json({ error: "Title is duplicate" }));
+};
+
+exports.getAllblogs = (req, res) => {
+  Blogs.find({})
+    .then((blogs) => res.json(blogs))
     .catch((err) => res.status(400).json({ error: "Title is duplicate" }));
 };
