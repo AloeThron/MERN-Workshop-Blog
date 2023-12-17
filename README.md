@@ -8,6 +8,8 @@ FontEnd
 - Bootstrap
 - axios
 - sweetalert2
+- react-quill
+
 
 
 BackEnd

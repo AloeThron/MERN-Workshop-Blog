@@ -1,7 +1,7 @@
 // connect database
 const slugify = require("slugify");
 const Blogs = require("../models/blogs");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 // save data
 exports.create = (req, res) => {
@@ -35,3 +35,19 @@ exports.singleBlog = (req, res) => {
   const { slug } = req.params;
   Blogs.findOne({ slug }).then((blogs) => res.json(blogs));
 };
+
+exports.remove = (req, res) => {
+  const { slug } = req.params;
+  Blogs.deleteOne({ slug })
+    .then((blog) => res.json({ message: "Article was remove" }))
+    .catch((err) => res.status(400).json(err));
+};
+
+exports.update = (req, res) => {
+  const { title, content, author } = req.body;
+  const { slug } = req.params;
+  Blogs.updateOne({ slug }, { title, content, author }, {new: true})
+    .then((blog) => res.json(blog))
+    .catch((err) => res.status(400).json(err));
+};
+
