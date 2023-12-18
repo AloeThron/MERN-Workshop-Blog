@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
 import axios from "axios";
 import Swal from "sweetalert2";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../../services/authorize";
 
 export default function Form() {
   const apiUrl = "http://localhost:8000/api";
 
   const [state, setState] = useState({
     title: "",
-    author: "",
+    author: getUser(),
   });
   const { title, author } = state;
 
@@ -21,6 +23,15 @@ export default function Form() {
       setState({ ...state, [name]: e.target.value });
     };
   }
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+  };
+
+  useEffect(() => {
+    getUser() && handleClick()
+  }, [])
 
   function submitForm(e) {
     e.preventDefault();

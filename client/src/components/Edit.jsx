@@ -5,6 +5,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../../services/authorize";
 
 export default function Edit() {
   const apiUrl = "http://localhost:8000/api";
@@ -16,6 +18,15 @@ export default function Edit() {
   });
   const { title, author, slug } = state;
   const [content, setContent] = useState("");
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+  };
+
+  useEffect(() => {
+    getUser() && handleClick()
+  }, [])
 
   useEffect(() => {
     async function fetchData() {

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { authenticate, getUser } from "../../services/authorize";
 import Nav from "./Nav";
-import axios from "axios"
+import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function Login() {
+export default function Login({ history }) {
   const apiUrl = "http://localhost:8000/api";
 
   const [state, setState] = useState({
@@ -28,7 +30,8 @@ export default function Login() {
           text: "Login complete!",
           icon: "success",
         });
-        setState({ ...state, title: "", author: "" });
+        setState({ ...state, username, password });
+        authenticate(res, () => handleClick());
       })
       .catch((err) => {
         Swal.fire({
@@ -38,6 +41,15 @@ export default function Login() {
         });
       });
   }
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+  };
+
+  useEffect(() => {
+    getUser() && handleClick()
+  }, [])
 
   return (
     <div className="container p-5">

@@ -4,7 +4,8 @@ import "./App.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
+import { getUser } from "../services/authorize";
 
 function App() {
   const apiUrl = "http://localhost:8000/api";
@@ -61,15 +62,22 @@ function App() {
                 Author: {blog.author}, Publish:{" "}
                 {new Date(blog.createdAt).toLocaleString()}
               </p>
-              <Link to={`/blog/edit/${blog.slug}`} className="btn btn-outline-success">
-                Edit Article
-              </Link>{" "}
-              <button
-                className="btn btn-outline-danger"
-                onClick={() => confirmDelete(blog.slug)}
-              >
-                Delete Article
-              </button>
+              {getUser() && (
+                <div>
+                  <Link
+                    to={`/blog/edit/${blog.slug}`}
+                    className="btn btn-outline-success"
+                  >
+                    Edit Article
+                  </Link>{" "}
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => confirmDelete(blog.slug)}
+                  >
+                    Delete Article
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))}
