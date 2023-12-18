@@ -10,6 +10,9 @@ export default function Nav() {
             <li className='nav-item pr-3 pt-3 pb-3'>
                 <a href="/create" className='nav-link'>Write Article</a>
             </li>
+            <li className='nav-item pr-3 pt-3 pb-3'>
+                <a href="/login" className='nav-link'>Sign in</a>
+            </li>
         </ul>
     </nav>
   )

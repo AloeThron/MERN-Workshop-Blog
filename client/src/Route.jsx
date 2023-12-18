@@ -4,6 +4,7 @@ import App from "./App";
 import Form from "./components/Form";
 import SinglePost from "./components/SinglePost";
 import Edit from "./components/Edit";
+import Login from "./components/Login";
 
 export default function PRoute() {
 
@@ -16,6 +17,7 @@ export default function PRoute() {
         <Route path="/create" element={<Form />}/>
         <Route path="/blog/:slug" element={<SinglePost />} />
         <Route path="/blog/edit/:slug" element={<Edit />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
