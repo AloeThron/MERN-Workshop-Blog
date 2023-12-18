@@ -30,7 +30,7 @@ export default function Form() {
   };
 
   useEffect(() => {
-    getUser() && handleClick()
+    !getUser() && handleClick()
   }, [])
 
   function submitForm(e) {

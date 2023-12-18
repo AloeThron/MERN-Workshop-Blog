@@ -25,10 +25,6 @@ export default function Edit() {
   };
 
   useEffect(() => {
-    getUser() && handleClick()
-  }, [])
-
-  useEffect(() => {
     async function fetchData() {
       try {
         const blog = await axios.get(`${apiUrl}/blog/${slugb}`);
@@ -39,6 +35,7 @@ export default function Edit() {
         (err) => alert(err);
       }
     }
+    !getUser() && handleClick()
     fetchData();
   }, []);
 

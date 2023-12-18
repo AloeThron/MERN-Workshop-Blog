@@ -1,5 +1,5 @@
 import { getUser } from "../services/authorize";
-import { Router, Redirect } from "react-router-dom";
+import { Router, useNavigate } from "react-router-dom";
 
 export default function AdminRoute({ component: Component, ...rest }) {
   <Router
