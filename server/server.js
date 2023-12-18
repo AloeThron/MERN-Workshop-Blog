@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const blogRoute = require("./routes/blog");
+const authRoute = require("./routes/auth")
 
 const app = express(); // สร้าง instance ของ Express application
 
@@ -20,6 +21,7 @@ app.use(morgan("dev")); // ช้ในการ log ข้อมูลการ
 
 // route
 app.use("/api", blogRoute); // กำหนดให้ middleware นี้ทำงานกับเส้นทางที่เริ่มต้นด้วย "/api" ซึ่งจะถูกเชื่อมต่อกับ blogRoute ที่ถูกนำเข้ามา
+app.use("/api", authRoute); // กำหนดให้ middleware นี้ทำงานกับเส้นทางที่เริ่มต้นด้วย "/api" ซึ่งจะถูกเชื่อมต่อกับ authRoute ที่ถูกนำเข้ามา
 
 const port = process.env.PORT || 8080; // กำหนด port ที่ server จะทำงาน ถ้าไม่ได้กำหนดไว้ใน environment variable จะใช้ค่า default เป็น 8080
 app.listen(port, () => console.log(`Start server in port ${port}`)); // เริ่มต้น server ให้เริ่มทำงานบน port ที่กำหนดไว้ และ log ข้อความว่าเริ่มทำงาน server ที่ port นั้น

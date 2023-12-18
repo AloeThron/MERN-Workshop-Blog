@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Nav from "./Nav";
+import axios from "axios"
+import Swal from "sweetalert2";
 
 export default function Login() {
+  const apiUrl = "http://localhost:8000/api";
+
   const [state, setState] = useState({
     username: "",
     password: "",
@@ -17,15 +21,14 @@ export default function Login() {
   function submitForm(e) {
     e.preventDefault();
     axios
-      .post(`${apiUrl}/create`, { title, content, author })
+      .post(`${apiUrl}/login`, { username, password })
       .then((res) => {
         Swal.fire({
           title: "Alert!",
-          text: "Send data complete!",
+          text: "Login complete!",
           icon: "success",
         });
         setState({ ...state, title: "", author: "" });
-        setContent("");
       })
       .catch((err) => {
         Swal.fire({
