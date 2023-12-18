@@ -5,6 +5,7 @@ import Form from "./components/Form";
 import SinglePost from "./components/SinglePost";
 import Edit from "./components/Edit";
 import Login from "./components/Login";
+import AdminRoute from "./AdminRoute";
 
 export default function PRoute() {
 
@@ -14,9 +15,9 @@ export default function PRoute() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}/>
-        <Route path="/create" element={<Form />}/>
+        <AdminRoute path="/create" element={<Form />}/>
         <Route path="/blog/:slug" element={<SinglePost />} />
-        <Route path="/blog/edit/:slug" element={<Edit />} />
+        <AdminRoute path="/blog/edit/:slug" element={<Edit />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
