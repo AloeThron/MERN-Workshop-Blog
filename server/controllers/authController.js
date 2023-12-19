@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
+const expressJwt = require("express-jwt");
 
 exports.login = (req, res) => {
   const { username, password } = req.body;
-  if (password === process.env.PASSWORD ) {
+  if (password === process.env.PASSWORD) {
     const token = jwt.sign({ username }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
@@ -13,3 +14,14 @@ exports.login = (req, res) => {
     });
   }
 };
+
+// check token
+function requireLoginMiddleware(req, res, next) {
+  const jwtMiddleware = expressJwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ["HS256"],
+    userProperty: "auth",
+  });
+  return jwtMiddleware(req, res, next);
+}
+exports.requireLogin = requireLoginMiddleware;
